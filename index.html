@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta content="MilkLegend | B.I.P. Finder" property="og:title" />
+    <meta content="Finding you the best priced items in DemocracyCraft." property="og:description" />
+    <meta content="https://bip.milklegend.xyz/" property="og:url" />
+    <title>Item Price Tracker</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <link rel="stylesheet" type="text/css" href="css/table.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css"></script>
+    <script type="text/javascript" language="javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://www.unpkg.com/decimal.js-light@2.5.1/decimal.js"></script>
+</head>
+
+<body>
+    <div class="home-container">
+        <h1 class="home-title">
+            <span>Item Price Tracker</span>
+        </h1>
+        <input type="text" id="searchbar" placeholder="Search for an item" class="home-textinput input" />
+    </div>
+    <div class="results-container">
+        <table class="results-table" style="width: 80%;">
+            <thead>
+                <tr>
+                    <th>Last Updated</th>
+                    <th>Location</th>
+                    <th>Store</th>
+                    <th>Item ID</th>
+                    <th>Buy Price Per Unit</th>
+                    <th>Sell Price Per Unit</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <script src="js/index.js"></script>
+</body>
