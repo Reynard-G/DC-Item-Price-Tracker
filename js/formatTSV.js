@@ -23,12 +23,12 @@ function formatData(dataArr) {
     console.time("Finished formatting data in");
 
     // Remove the "username" key from each object efficiently
-    console.time("Removed usernames in")
+    console.time("Removed usernames in");
     const formattedArr = dataArr.map(({ Username, ...rest }) => rest);
     console.timeEnd("Removed usernames in");
 
     // Add a new key to each object named "price" and add the values by calculating the amount bought with its price efficiently.
-    console.time("Calculated prices in")
+    console.time("Calculated prices in");
     const pricedArr = formattedArr.map((item) => {
         item.Price = Number(item.Price) / item.Amount;
         delete item.Amount;
@@ -37,7 +37,7 @@ function formatData(dataArr) {
     console.timeEnd("Calculated prices in");
 
     // Create a Set of unique objects
-    console.time("Created unique objects in")
+    console.time("Created unique objects in");
     const uniqueSet = new Set(pricedArr.map(JSON.stringify));
 
     // Convert Set back to array
@@ -45,7 +45,7 @@ function formatData(dataArr) {
     console.timeEnd("Created unique objects in");
 
     // Create a new array of objects that combines the buy and sell prices efficiently.
-    console.time("Combined buy and sell prices in")
+    console.time("Combined buy and sell prices in");
     const finalArr = [];
     filteredArr.forEach((item) => {
         const index = finalArr.findIndex((obj) => obj["Item Name"] === item["Item Name"] && obj["Location"] === item["Location"] && obj["Store"] === item["Store"]);
@@ -83,17 +83,6 @@ function formatData(dataArr) {
     return finalArr;
 }
 
-function fastSearch(search, objects) {
-    const searchResults = objects.filter((object) => {
-        for (const _ in object) {
-            if (object["Item Name"].toLowerCase().includes(search)) {
-                return true;
-            }
-        }
-    });
-    return searchResults;
-}
-
 // Initialize the table
 const oneSixth = Decimal(100).div(6).toNumber();
 var table = $('.results-table').DataTable({
@@ -125,38 +114,10 @@ $(document).ready(async function () {
 
         // Format the data
         tableData = formatData(objects);
+
         console.dir(tableData);
     }).then(() => {
-        table.destroy();
-        table = $('.results-table').DataTable({
-            data: tableData,
-            columns: [
-                { data: "Date", width: `${oneSixth}%` },
-                { data: "Location", width: `${oneSixth}%` },
-                { data: "Store", width: `${oneSixth}%` },
-                { data: "Item Name", width: `${oneSixth}%` },
-                { data: "buyPrice", width: `${oneSixth}%` },
-                { data: "sellPrice", width: `${oneSixth}%` },
-            ],
-            order: [[3, "asc"]],
-            pageLength: 25,
-            dom: 'Bfrtip',
-            info: false,
-            searching: false,
-            paging: true,
-            ordering: true,
-            retrieve: true,
-        });
+        // Add the data to the table
+        table.rows.add(tableData).draw();
     });
-});
-
-document.querySelector('#searchbar').addEventListener('input', function (e) {
-    const search = e.target.value.toLowerCase();
-    const searchResults = fastSearch(search, tableData);
-
-    // Clear the table
-    table.clear().draw();
-
-    // Add a new row for each object in the search results
-    table.rows.add(searchResults).draw();
 });
