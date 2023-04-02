@@ -84,15 +84,14 @@ function formatData(dataArr) {
 }
 
 // Initialize the table
-const oneSixth = Decimal(100).div(6).toNumber();
 var table = $('.results-table').DataTable({
     columns: [
-        { data: "Date", width: `${oneSixth}%` },
-        { data: "Location", width: `${oneSixth}%` },
-        { data: "Store", width: `${oneSixth}%` },
-        { data: "Item Name", width: `${oneSixth}%` },
-        { data: "buyPrice", width: `${oneSixth}%` },
-        { data: "sellPrice", width: `${oneSixth}%` },
+        { data: "Date", width: `${100 / 6}%` },
+        { data: "Location", width: `${100 / 6}%` },
+        { data: "Store", width: `${100 / 6}%` },
+        { data: "Item Name", width: `${100 / 6}%` },
+        { data: "buyPrice", width: `${100 / 6}%` },
+        { data: "sellPrice", width: `${100 / 6}%` },
     ],
     order: [[3, "asc"]],
     pageLength: 25,
@@ -108,7 +107,7 @@ var table = $('.results-table').DataTable({
 var tableData = [];
 $(document).ready(async function () {
     // Load the csv data
-    $.get("../data/January 2023.tsv", function (data) {
+    $.get("../data/April 2023.tsv", function (data) {
         // Convert csv to an array of objects
         const objects = csvToObjects(data, "\t");
 

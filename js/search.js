@@ -9,7 +9,7 @@ function fastSearch(search, objects) {
     return searchResults;
 }
 
-// Get data from "January 2023.json" without blocking the UI
+// Get data from latest JSON without blocking the UI
 document.querySelector('#searchbar').addEventListener('input', async function (e) {
     const search = e.target.value.toLowerCase();
     const searchResults = fastSearch(search, tableData);

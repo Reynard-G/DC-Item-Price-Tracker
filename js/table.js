@@ -1,17 +1,16 @@
 // Initialize the table
-const oneSixth = Decimal(100).div(6).toNumber();
 var table = $('.results-table').DataTable({
     ajax: {
-        url: "data/January 2023.json",
+        url: "data/April 2023.json",
         dataSrc: "",
     },
     columns: [
-        { data: "Date", width: `${oneSixth}%` },
-        { data: "Location", width: `${oneSixth}%` },
-        { data: "Store", width: `${oneSixth}%` },
-        { data: "Item Name", width: `${oneSixth}%` },
-        { data: "buyPrice", width: `${oneSixth}%` },
-        { data: "sellPrice", width: `${oneSixth}%` },
+        { data: "Date", width: `${100 / 6}%` },
+        { data: "Location", width: `${100 / 6}%` },
+        { data: "Store", width: `${100 / 6}%` },
+        { data: "Item Name", width: `${100 / 6}%` },
+        { data: "buyPrice", width: `${100 / 6}%` },
+        { data: "sellPrice", width: `${100 / 6}%` },
     ],
     responsive: true,
     columnDefs: [
