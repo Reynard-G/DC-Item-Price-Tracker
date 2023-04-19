@@ -1,9 +1,31 @@
 // Initialize the table
 var table = $('.results-table').DataTable({
+    processing: true,
+    serverSide: true,
     ajax: {
-        url: "data/April 2023.json",
-        dataSrc: "",
+        url: "scripts/server_processing.php",
+        type: "GET",
+        data: function (outData) {
+            console.log(outData)
+            return outData;
+        },
+        dataFilter: function (inData) {
+            console.log(inData)
+            return inData;
+        },
+        error: function (error, status) {
+            console.log(error)
+            console.log(status)
+        }
     },
+    columns: [
+        { data: "ItemId", mData: "ItemId" },
+        { data: "Mode", mData: "Mode" },
+        { data: "Amount", mData: "Amount" },
+        { data: "Quantity", mData: "Quantity" },
+        { data: "Time", mData: "Time" }
+    ],
+    /*
     columns: [
         { data: "Date", width: `${100 / 6}%` },
         { data: "Location", width: `${100 / 6}%` },
@@ -29,5 +51,5 @@ var table = $('.results-table').DataTable({
     info: false,
     searching: false,
     paging: true,
-    ordering: true,
+    ordering: true,*/
 });
