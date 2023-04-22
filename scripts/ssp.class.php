@@ -70,7 +70,6 @@ class SSP {
 	 *     * db   - database name
 	 *     * user - user name
 	 *     * pass - user password
-	 *     * Optional: `'charset' => 'utf8'` - you might need this depending on your PHP / MySQL config
 	 *  @return resource PDO connection
 	 */
 	static function db ( $conn )
@@ -255,7 +254,7 @@ class SSP {
 			 FROM `$table`
 			 $where
 			 $order
-			 $limit"
+			 LIMIT 10"
 		);
 
 		// Data set length after filtering
@@ -301,33 +300,21 @@ class SSP {
 	 *   used in conditions where you don't want the user to ever have access to
 	 *   particular records (for example, restricting by a login id).
 	 *
-	 * In both cases the extra condition can be added as a simple string, or if
-	 * you are using external values, as an assoc. array with `condition` and
-	 * `bindings` parameters. The `condition` is a string with the SQL WHERE
-	 * condition and `bindings` is an assoc. array of the binding names and
-	 * values.
-	 *
 	 *  @param  array $request Data sent to server by DataTables
 	 *  @param  array|PDO $conn PDO connection resource or connection parameters array
 	 *  @param  string $table SQL table to query
 	 *  @param  string $primaryKey Primary key of the table
 	 *  @param  array $columns Column information array
-	 *  @param  string|array $whereResult WHERE condition to apply to the result set
-	 *  @param  string|array $whereAll WHERE condition to apply to all queries
+	 *  @param  string $whereResult WHERE condition to apply to the result set
+	 *  @param  string $whereAll WHERE condition to apply to all queries
 	 *  @return array          Server-side processing response array
 	 */
-	static function complex (
-		$request,
-		$conn,
-		$table,
-		$primaryKey,
-		$columns,
-		$whereResult=null,
-		$whereAll=null
-	) {
+	static function complex ( $request, $conn, $table, $primaryKey, $columns, $whereResult=null, $whereAll=null )
+	{
 		$bindings = array();
-		$whereAllBindings = array();
 		$db = self::db( $conn );
+		$localWhereResult = array();
+		$localWhereAll = array();
 		$whereAllSql = '';
 
 		// Build the SQL query string from the request
@@ -335,41 +322,21 @@ class SSP {
 		$order = self::order( $request, $columns );
 		$where = self::filter( $request, $columns, $bindings );
 
-		// whereResult can be a simple string, or an assoc. array with a
-		// condition and bindings
+		$whereResult = self::_flatten( $whereResult );
+		$whereAll = self::_flatten( $whereAll );
+
 		if ( $whereResult ) {
-			$str = $whereResult;
-
-			if ( is_array($whereResult) ) {
-				$str = $whereResult['condition'];
-
-				if ( isset($whereResult['bindings']) ) {
-					self::add_bindings($bindings, $whereResult['bindings']);
-				}
-			}
-
 			$where = $where ?
-				$where .' AND '.$str :
-				'WHERE '.$str;
+				$where .' AND '.$whereResult :
+				'WHERE '.$whereResult;
 		}
 
-		// Likewise for whereAll
 		if ( $whereAll ) {
-			$str = $whereAll;
-
-			if ( is_array($whereAll) ) {
-				$str = $whereAll['condition'];
-
-				if ( isset($whereAll['bindings']) ) {
-					self::add_bindings($whereAllBindings, $whereAll['bindings']);
-				}
-			}
-
 			$where = $where ?
-				$where .' AND '.$str :
-				'WHERE '.$str;
+				$where .' AND '.$whereAll :
+				'WHERE '.$whereAll;
 
-			$whereAllSql = 'WHERE '.$str;
+			$whereAllSql = 'WHERE '.$whereAll;
 		}
 
 		// Main query to actually get the data
@@ -390,7 +357,7 @@ class SSP {
 		$recordsFiltered = $resFilterLength[0][0];
 
 		// Total data set length
-		$resTotalLength = self::sql_exec( $db, $whereAllBindings,
+		$resTotalLength = self::sql_exec( $db, $bindings,
 			"SELECT COUNT(`{$primaryKey}`)
 			 FROM   `$table` ".
 			$whereAllSql
@@ -528,17 +495,6 @@ class SSP {
 		return $key;
 	}
 
-	static function add_bindings(&$a, $vals)
-	{
-		foreach($vals['bindings'] as $key => $value) {
-			$bindings[] = array(
-				'key' => $key,
-				'val' => $value,
-				'type' => PDO::PARAM_STR
-			);
-		}
-	}
-
 
 	/**
 	 * Pull a particular property from each assoc. array in a numeric array, 
@@ -553,10 +509,9 @@ class SSP {
 		$out = array();
 
 		for ( $i=0, $len=count($a) ; $i<$len ; $i++ ) {
- 			if ( empty($a[$i][$prop]) && $a[$i][$prop] !== 0 ) {
-				continue;
+            if(empty($a[$i][$prop])){
+                continue;
 			}
-
 			//removing the $out array index confuses the filter method in doing proper binding,
 			//adding it ensures that the array data are mapped correctly
 			$out[$i] = $a[$i][$prop];
@@ -584,4 +539,3 @@ class SSP {
 		return $a;
 	}
 }
-

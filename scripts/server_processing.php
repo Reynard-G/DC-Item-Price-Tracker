@@ -41,13 +41,6 @@ $columns = array(
 );
 
 // SQL server connection information
-/*$sql_details = array(
-    'user' => 'u1795_tdlFYcn90H',
-    'pass' => 'ZgfdnFLyyza6enuUEYjH4T99',
-    'db'   => 's1795_chestshop_test',
-    'host' => '174.136.202.154:3306'
-    // ,'charset' => 'utf8' // Depending on your PHP and MySQL config, you may need this
-);*/
 $sql_details = array(
     'user' => $_ENV['DB_USERNAME'],
     'pass' => $_ENV['DB_PASSWORD'],

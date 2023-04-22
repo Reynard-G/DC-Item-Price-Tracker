@@ -3,7 +3,7 @@ var table = $('.results-table').DataTable({
     processing: true,
     serverSide: true,
     ajax: {
-        url: "scripts/server_processing.php",
+        url: "https://localhost:5500/scripts/server_processing.php",
         type: "GET",
         data: function (outData) {
             console.log(outData)
