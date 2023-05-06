@@ -2,18 +2,16 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta content="MilkLegend | Item Price Tracker" property="og:title" />
-    <meta content="Finding you the best priced items in DemocracyCraft." property="og:description" />
-    <meta content="https://tracker.milklegend.xyz/" property="og:url" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta content="MilkLegend | Item Price Tracker" property="og:title">
+    <meta content="Finding you the best priced items in DemocracyCraft." property="og:description">
+    <meta content="https://tracker.milklegend.xyz/" property="og:url">
     <title>Item Price Tracker</title>
-    
-    <link rel="stylesheet" type="text/css" href="css/styles.css" />
-    <link rel="stylesheet" type="text/css" href="css/table.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
-    <!--script src="js/formatTSV.js"></script-->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
 </head>
 
 <body>
@@ -21,27 +19,29 @@
         <h1 class="home-title">
             <span>Item Price Tracker</span>
         </h1>
-        <input type="text" id="searchbar" placeholder="Search for an item" class="home-textinput input" />
+        <input type="text" id="searchbar" placeholder="Search for an item" class="home-textinput input">
     </div>
     <div class="results-container">
         <table class="results-table" style="width: 80%;">
             <thead>
                 <tr>
-                    <th>ItemId</th>
-                    <th>Mode</th>
-                    <th>Amount</th>
-                    <th>Quantity</th>
-                    <th>Time</th>
+                    <th>Last Updated</th>
+                    <th>Location</th>
+                    <th>Store</th>
+                    <th>Item ID</th>
+                    <th>Buy Price Per Unit</th>
+                    <th>Sell Price Per Unit</th>
                 </tr>
             </thead>
         </table>
     </div>
-
-    <script type="text/javascript" language="javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script>
-    <script type="text/javascript" language="javascript" src="https://www.unpkg.com/decimal.js-light@2.5.1/decimal.js"></script>
-    <script src="js/table.js"></script>
-    <script src="js/ready.js"></script>
-    <script src="js/search.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/decimal.js-light@2.5.1/decimal.min.js"></script>
+    <script defer src="js/table.js"></script>
+    <script defer src="js/ready.js"></script>
+    <script defer src="js/search.js"></script>
 </body>
+
+</html>
