@@ -1,4 +1,4 @@
-const mariadb = require("mariadb");
+import mariadb from "mariadb";
 
 const pool = mariadb.createPool({
   host: process.env.DB_HOST,
@@ -14,15 +14,18 @@ export default async function handler(req, res) {
   if (req.method === "GET") {
     try {
       const rows = await pool.query(`
-        SELECT 
-          item_name,
-          location,
-          buy_price_per_unit,
-          sell_price_per_unit,
-          CAST(UNIX_TIMESTAMP(created_at) AS CHAR) AS created_at
-        FROM historical_prices
-        WHERE location LIKE "[Reveille]%"
-        ORDER BY created_at DESC
+        SELECT
+          h1.item_name,
+          h1.location,
+          h1.buy_price_per_unit,
+          h1.sell_price_per_unit,
+          CAST(UNIX_TIMESTAMP(h1.created_at) AS CHAR) AS created_at
+        FROM historical_prices h1
+        LEFT JOIN historical_prices h2
+          ON h1.location = h2.location
+          AND (h1.created_at < h2.created_at OR (h1.created_at = h2.created_at AND h1.id < h2.id))
+          AND h2.location IS NULL
+        WHERE h1.location LIKE '[Reveille]%';
       `);
 
       res.status(200).json(rows);

@@ -119,7 +119,6 @@ export default function DataTable({ items, searchTerm, handleSearchChange }) {
           noMargin
           align="center"
           rowsPerPage={9}
-          onPageChange={(page) => console.log({ page })}
         />
       </Table>
     </div>
