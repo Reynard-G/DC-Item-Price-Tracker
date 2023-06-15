@@ -18,7 +18,7 @@ function itemNameToMinecraftName(itemName) {
 }
 
 function iconURL(itemName) {
-  const baseURL = "https://mc.nerothe.com/img/1.19.4/";
+  const baseURL = "https://mc.nerothe.com/img/1.20.1/";
   const imageType = ".png";
   const minecraftName = itemNameToMinecraftName(itemName);
 
@@ -59,6 +59,7 @@ export default function DataTable({ items, searchTerm, handleSearchChange }) {
         <Table.Header>
           <Table.Column
             allowsSorting
+            width="100%"
             css={{
               fontSize: '1rem',
             }}
@@ -67,6 +68,7 @@ export default function DataTable({ items, searchTerm, handleSearchChange }) {
           </Table.Column>
           <Table.Column
             allowsSorting
+            width="100%"
             css={{
               fontSize: '1rem',
             }}
@@ -75,6 +77,7 @@ export default function DataTable({ items, searchTerm, handleSearchChange }) {
           </Table.Column>
           <Table.Column
             allowsSorting
+            width="100%"
             css={{
               fontSize: '1rem',
             }}
@@ -83,6 +86,7 @@ export default function DataTable({ items, searchTerm, handleSearchChange }) {
           </Table.Column>
           <Table.Column
             allowsSorting
+            width="100%"
             css={{
               fontSize: '1rem',
             }}
@@ -91,6 +95,7 @@ export default function DataTable({ items, searchTerm, handleSearchChange }) {
           </Table.Column>
           <Table.Column
             allowsSorting
+            width="100%"
             css={{
               fontSize: '1rem',
             }}
@@ -113,7 +118,7 @@ export default function DataTable({ items, searchTerm, handleSearchChange }) {
           shadow
           noMargin
           align="center"
-          rowsPerPage={10}
+          rowsPerPage={9}
           onPageChange={(page) => console.log({ page })}
         />
       </Table>
