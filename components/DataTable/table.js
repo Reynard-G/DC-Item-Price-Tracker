@@ -48,7 +48,6 @@ export default function DataTable({ items, searchTerm, handleSearchChange }) {
     <div className="mt-8">
       <Table
         bordered
-        fixed
         aria-label='DataTable'
         selectionMode="single"
         css={{
@@ -59,7 +58,6 @@ export default function DataTable({ items, searchTerm, handleSearchChange }) {
         <Table.Header>
           <Table.Column
             allowsSorting
-            width="100%"
             css={{
               fontSize: '1rem',
             }}
@@ -68,7 +66,6 @@ export default function DataTable({ items, searchTerm, handleSearchChange }) {
           </Table.Column>
           <Table.Column
             allowsSorting
-            width="100%"
             css={{
               fontSize: '1rem',
             }}
@@ -77,7 +74,6 @@ export default function DataTable({ items, searchTerm, handleSearchChange }) {
           </Table.Column>
           <Table.Column
             allowsSorting
-            width="100%"
             css={{
               fontSize: '1rem',
             }}
@@ -86,7 +82,6 @@ export default function DataTable({ items, searchTerm, handleSearchChange }) {
           </Table.Column>
           <Table.Column
             allowsSorting
-            width="100%"
             css={{
               fontSize: '1rem',
             }}
@@ -95,7 +90,6 @@ export default function DataTable({ items, searchTerm, handleSearchChange }) {
           </Table.Column>
           <Table.Column
             allowsSorting
-            width="100%"
             css={{
               fontSize: '1rem',
             }}
