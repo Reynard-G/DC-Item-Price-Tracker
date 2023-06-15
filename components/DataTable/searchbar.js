@@ -10,7 +10,7 @@ export default function SearchBar({ searchTerm, handleSearchChange }) {
         value={searchTerm}
         onChange={handleSearchChange}
         className="dark"
-        width="50rem"
+        width="50vw"
         color="default"
         clearable
         bordered

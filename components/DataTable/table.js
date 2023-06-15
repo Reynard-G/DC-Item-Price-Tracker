@@ -13,13 +13,13 @@ function itemNameToMinecraftName(itemName) {
     }
     return letter;
   }).toLowerCase();
-  
+
   return item;
 }
 
 function iconURL(itemName) {
-  const baseURL = "https://mc.nerothe.com/img/1.19.4/"
-  const imageType = ".png"
+  const baseURL = "https://mc.nerothe.com/img/1.19.4/";
+  const imageType = ".png";
   const minecraftName = itemNameToMinecraftName(itemName);
 
   return baseURL + minecraftName + imageType;
@@ -45,12 +45,16 @@ export default function DataTable({ items, searchTerm, handleSearchChange }) {
 
 
   return (
-    <div className="w-4/5 mt-8">
+    <div className="mt-8">
       <Table
-        aria-label='DataTable'
-        selectionMode="single"
         bordered
         fixed
+        aria-label='DataTable'
+        selectionMode="single"
+        css={{
+          height: 'auto',
+          width: '80vw'
+        }}
       >
         <Table.Header>
           <Table.Column
