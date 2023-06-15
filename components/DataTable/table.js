@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { Table, User } from '@nextui-org/react';
 
 function itemNameToMinecraftName(itemName) {
@@ -39,10 +40,13 @@ function formatCurrency(value) {
 }
 
 export default function DataTable({ items, searchTerm, handleSearchChange }) {
-  const filteredItems = items.filter((item) => {
-    return item.item_name.toLowerCase().includes(searchTerm.toLowerCase());
-  });
-
+  console.time('Search Time');
+  const filteredItems = useMemo(() => {
+    return items.filter((item) => {
+      return item.item_name.toLowerCase().includes(searchTerm.toLowerCase());
+    });
+  }, [items, searchTerm]);
+  console.timeEnd('Search Time');
 
   return (
     <div className="mt-8">
@@ -51,8 +55,9 @@ export default function DataTable({ items, searchTerm, handleSearchChange }) {
         aria-label='DataTable'
         selectionMode="single"
         css={{
+          display: 'block',
           height: 'auto',
-          width: '80vw'
+          width: '80vw',
         }}
       >
         <Table.Header>
@@ -60,6 +65,7 @@ export default function DataTable({ items, searchTerm, handleSearchChange }) {
             allowsSorting
             css={{
               fontSize: '1rem',
+              width: "30vw"
             }}
           >
             Name
@@ -68,6 +74,7 @@ export default function DataTable({ items, searchTerm, handleSearchChange }) {
             allowsSorting
             css={{
               fontSize: '1rem',
+              width: "10vw"
             }}
           >
             Updated
@@ -76,6 +83,7 @@ export default function DataTable({ items, searchTerm, handleSearchChange }) {
             allowsSorting
             css={{
               fontSize: '1rem',
+              width: "20vw"
             }}
           >
             Location
@@ -84,6 +92,7 @@ export default function DataTable({ items, searchTerm, handleSearchChange }) {
             allowsSorting
             css={{
               fontSize: '1rem',
+              width: "20vw"
             }}
           >
             Buy Price Per Unit
@@ -92,6 +101,7 @@ export default function DataTable({ items, searchTerm, handleSearchChange }) {
             allowsSorting
             css={{
               fontSize: '1rem',
+              width: "20vw"
             }}
           >
             Sell Price Per Unit

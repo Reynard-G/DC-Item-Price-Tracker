@@ -32,10 +32,10 @@ const darkTheme = createTheme({
   },
 });
 
-export default function Main() {
+export default function Main({ pageProps }) {
   return (
     <NextUIProvider theme={darkTheme}>
-      <Home />
+      <Home {...pageProps} />
     </NextUIProvider>
   )
 }
