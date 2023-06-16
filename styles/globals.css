@@ -27,3 +27,7 @@ html,
 body {
   font-family: 'Kanit', sans-serif !important;
 }
+
+.p-paginator {
+  justify-content: center !important;
+}

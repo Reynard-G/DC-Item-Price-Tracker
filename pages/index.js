@@ -1,4 +1,6 @@
 import '../styles/globals.css';
+import 'primereact/resources/primereact.min.css';
+import 'primereact/resources/themes/mdc-dark-indigo/theme.css';
 
 import { createTheme, NextUIProvider } from "@nextui-org/react";
 import { useState } from 'react';
@@ -44,7 +46,7 @@ const Home = () => {
   const { data: items, error } = useSWR('/api/latestItems', fetcher);
   const [searchTerm, setSearchTerm] = useState('');
 
-  if (error) return <div>Failed to load items</div>;
+  if (error) return <div className='flex flex-col justify-center items-center min-h-screen dark:bg-[#1e1e1e]'>Failed to load in items</div>;
   if (!items) return <Loading />;
 
   const handleSearchChange = (e) => {
@@ -52,7 +54,7 @@ const Home = () => {
   };
 
   return (
-      <div className="flex flex-col items-center min-h-screen dark:bg-[#262626]">
+      <div className="flex flex-col items-center min-h-screen dark:bg-[#1e1e1e]">
         <Title />
         <SearchBar searchTerm={searchTerm} handleSearchChange={handleSearchChange} />
         <DataTable items={items} searchTerm={searchTerm} handleSearchChange={handleSearchChange} />
