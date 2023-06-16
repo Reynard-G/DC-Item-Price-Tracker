@@ -22,7 +22,7 @@ export default function Document() {
         <meta property='og:url' content='https://tracker.milklegend.xyz' />
         <meta property='og:image' content='https://imgs.milklegend.xyz/milklegend.png' />
 
-        <meta name='twitter:card' content='summary_large_image' />
+        <meta name='twitter:card' content='summary' />
         <meta name='twitter:title' content='Item Price Tracker' />
         <meta name='twitter:description' content='A website to view the latest item prices in DemocracyCraft.' />
         <meta name='twitter:url' content='https://tracker.milklegend.xyz' />
