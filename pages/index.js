@@ -2,6 +2,7 @@ import '../styles/globals.css';
 import 'primereact/resources/primereact.min.css';
 import 'primereact/resources/themes/mdc-dark-indigo/theme.css';
 
+import Head from 'next/head';
 import { createTheme, NextUIProvider } from "@nextui-org/react";
 import { useState } from 'react';
 import useSWR from 'swr';
@@ -39,7 +40,7 @@ export default function Main({ pageProps }) {
     <NextUIProvider theme={darkTheme}>
       <Home {...pageProps} />
     </NextUIProvider>
-  )
+  );
 }
 
 const Home = () => {
@@ -54,10 +55,16 @@ const Home = () => {
   };
 
   return (
+    <>
+      <Head>
+        <title>Item Price Tracker</title>
+      </Head>
+
       <div className="flex flex-col items-center min-h-screen dark:bg-[#1e1e1e]">
         <Title />
         <SearchBar searchTerm={searchTerm} handleSearchChange={handleSearchChange} />
         <DataTable items={items} searchTerm={searchTerm} handleSearchChange={handleSearchChange} />
       </div>
+    </>
   );
-}
+};

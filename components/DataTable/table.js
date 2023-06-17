@@ -26,7 +26,7 @@ function itemNameToMinecraftName(itemName) {
 }
 
 function iconURL(itemName) {
-  const baseURL = "https://mc.nerothe.com/img/1.20.1/";
+  const baseURL = "/items/";
   const imageType = ".png";
   const minecraftName = itemNameToMinecraftName(itemName);
 
