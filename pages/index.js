@@ -11,7 +11,7 @@ import useSWR from 'swr';
 import Title from 'components/Heading/title';
 import DataTable from 'components/DataTable/table';
 import SearchBar from 'components/DataTable/searchbar';
-import Loading from 'components/Loading/loading';
+import Loading from './loading';
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
