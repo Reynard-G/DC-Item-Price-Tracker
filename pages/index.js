@@ -4,6 +4,7 @@ import 'primereact/resources/themes/mdc-dark-indigo/theme.css';
 
 import Head from 'next/head';
 import { createTheme, NextUIProvider } from "@nextui-org/react";
+import { Analytics } from '@vercel/analytics/react';
 import { useState } from 'react';
 import useSWR from 'swr';
 
@@ -65,6 +66,8 @@ const Home = () => {
         <SearchBar searchTerm={searchTerm} handleSearchChange={handleSearchChange} />
         <DataTable items={items} searchTerm={searchTerm} handleSearchChange={handleSearchChange} />
       </div>
+
+      <Analytics />
     </>
   );
 };
