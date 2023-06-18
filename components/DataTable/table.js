@@ -87,9 +87,12 @@ export default function Datatable({ items, searchTerm, handleSearchChange }) {
     <div className="mt-8">
       <DataTable
         value={filteredItems}
+        paginator
         scrollable
         scrollHeight="60vh"
         stripedRows
+        rows={5}
+        rowsPerPageOptions={[5, 10, 25, 50]}
         emptyMessage="No items found"
         sortField='item_name'
         sortOrder={1}
