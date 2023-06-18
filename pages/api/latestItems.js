@@ -15,6 +15,7 @@ export default async function handler(req, res) {
     try {
       const rows = await pool.query(`
         SELECT
+          CAST(h1.id AS CHAR) AS id,
           h1.item_name,
           h1.location,
           h1.buy_price_per_unit,

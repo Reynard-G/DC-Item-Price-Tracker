@@ -47,6 +47,34 @@ function formatCurrency(value) {
 }
 
 export default function Datatable({ items, searchTerm, handleSearchChange }) {
+  const itemBodyTemplate = (rowData) => {
+    return (
+      <CardHeader
+        className='p-card-title'
+        avatar={
+          <Avatar
+            image={iconURL(rowData.item_name)}
+            size="large"
+            alt={rowData.item_name}
+          />
+        }
+        title={rowData.item_name}
+      />
+    );
+  };
+
+  const createdBodyTemplate = (rowData) => {
+    return new Intl.DateTimeFormat('en-US').format(new Date(rowData.created_at * 1e3));
+  };
+
+  const buyPriceBodyTemplate = (rowData) => {
+    return formatCurrency(rowData.buy_price_per_unit);
+  };
+
+  const sellPriceBodyTemplate = (rowData) => {
+    return formatCurrency(rowData.sell_price_per_unit);
+  };
+
   console.time('Search Time');
   const filteredItems = useMemo(() => {
     return items.filter((item) => {
@@ -59,11 +87,9 @@ export default function Datatable({ items, searchTerm, handleSearchChange }) {
     <div className="mt-8">
       <DataTable
         value={filteredItems}
-        paginator
         scrollable
+        scrollHeight='60vh'
         stripedRows
-        rows={5}
-        rowsPerPageOptions={[5, 10, 25, 50]}
         emptyMessage="No items found"
         sortField='item_name'
         sortOrder={1}
@@ -75,28 +101,14 @@ export default function Datatable({ items, searchTerm, handleSearchChange }) {
           header="Name"
           sortable
           style={{ minWidth: '20%' }}
-          body={(rowData) => (
-            <CardHeader
-              className='p-card-title'
-              avatar={
-                <Avatar
-                  image={iconURL(rowData.item_name)}
-                  size="large"
-                  alt={rowData.item_name}
-                />
-              }
-              title={rowData.item_name}
-            />
-          )}
+          body={itemBodyTemplate}
         />
         <Column
           field="created_at"
           header="Updated"
           sortable
           style={{ minWidth: '20%' }}
-          body={(rowData) => (
-            new Intl.DateTimeFormat('en-US').format(new Date(rowData.created_at * 1e3))
-          )}
+          body={createdBodyTemplate}
         />
         <Column
           field="location"
@@ -109,14 +121,14 @@ export default function Datatable({ items, searchTerm, handleSearchChange }) {
           header="Buy Price Per Unit"
           sortable
           style={{ minWidth: '20%' }}
-          body={(rowData) => formatCurrency(rowData.buy_price_per_unit)}
+          body={buyPriceBodyTemplate}
         />
         <Column
           field="sell_price_per_unit"
           header="Sell Price Per Unit"
           sortable
           style={{ minWidth: '20%' }}
-          body={(rowData) => formatCurrency(rowData.sell_price_per_unit)}
+          body={sellPriceBodyTemplate}
         />
       </DataTable>
     </div>
