@@ -22,7 +22,7 @@ const theme = responsiveFontSizes(
   }),
 );
 
-export const metadata = {
+const metadata = {
   title: 'So long...',
   description: 'It was a nice journey with you, but now it is time to say goodbye.',
 };
